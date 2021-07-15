@@ -1,27 +1,39 @@
-import React from 'react'
-import { Card } from 'semantic-ui-react'
+import React from "react";
+import { Card } from "semantic-ui-react";
 
 class PokemonCard extends React.Component {
+  state = {
+    flipped: false,
+  };
+
+  toggle = () => {
+    this.setState({ flipped: !this.state.flipped });
+  };
+
   render() {
+    const { name, hp, sprites } = this.props;
     return (
-      <Card>
+      <Card onClick={this.toggle}>
         <div>
           <div className="image">
-            <img alt="oh no!" />
+            <img
+              src={this.state.flipped ? sprites.back : sprites.front}
+              alt="oh no!"
+            />
           </div>
           <div className="content">
-            <div className="header">POKEMON NAME HERE</div>
+            <div className="header">{name}</div>
           </div>
           <div className="extra content">
             <span>
               <i className="icon heartbeat red" />
-              POKEMON HP HERE hp
+              {hp}
             </span>
           </div>
         </div>
       </Card>
-    )
+    );
   }
 }
 
-export default PokemonCard
+export default PokemonCard;
